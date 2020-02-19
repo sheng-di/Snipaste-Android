@@ -45,12 +45,12 @@ public class MainActivity extends AppCompatActivity {
         FloatWindow
                 .with(getApplicationContext())
                 .setView(mFloatLayout)
-                .setHeight(Screen.width, 0.2f)
                 .setX(100)
                 .setY(Screen.height, 0.3f)
                 .setDesktopShow(true)
                 .setMoveType(MoveType.active)
                 .build();
+        FloatWindow.get().show();
     }
 
     public static String getClipContent(Context context) {
@@ -62,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
             if (text != null) {
                 return text.toString();
             }
-
         }
         return null;
     }
