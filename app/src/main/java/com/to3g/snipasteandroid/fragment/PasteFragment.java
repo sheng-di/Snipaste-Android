@@ -21,6 +21,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +32,8 @@ import androidx.viewpager.widget.ViewPager;
 import com.qmuiteam.qmui.arch.annotation.LatestVisitRecord;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
+import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView;
+import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
 import com.qmuiteam.qmui.widget.tab.QMUITabBuilder;
 import com.qmuiteam.qmui.widget.tab.QMUITabIndicator;
 import com.qmuiteam.qmui.widget.tab.QMUITabSegment;
@@ -59,6 +62,8 @@ public class PasteFragment extends BaseFragment {
     QMUITabSegment mTabSegment;
     @BindView(R.id.contentViewPager)
     ViewPager mContentViewPager;
+    @BindView(R.id.textPasteListView)
+    QMUIGroupListView mGroupListView;
 
     private Map<ContentPage, View> mPageMap = new HashMap<>();
     private ContentPage mDestPage = ContentPage.Item1;
@@ -111,6 +116,32 @@ public class PasteFragment extends BaseFragment {
                         Toast.makeText(getContext(), "点击干嘛", Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    private void initGroupListView() {
+        QMUICommonListItemView itemWithSwitch = mGroupListView.createItemView("Item 5");
+        itemWithSwitch.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_SWITCH);
+        itemWithSwitch.getSwitch().setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Toast.makeText(getActivity(), "checked = " + isChecked, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        int size = QMUIDisplayHelper.dp2px(getContext(), 20);
+        QMUIGroupListView.newSection(getContext())
+                .setTitle("Section 1: 默认提供的样式")
+                .setDescription("Section 1 的描述")
+                .setLeftIconSize(size, ViewGroup.LayoutParams.WRAP_CONTENT)
+                .addItemView(itemWithSwitch, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                })
+                .setMiddleSeparatorInset(QMUIDisplayHelper.dp2px(getContext(), 16), 0)
+                .addTo(mGroupListView);
+
     }
 
 
