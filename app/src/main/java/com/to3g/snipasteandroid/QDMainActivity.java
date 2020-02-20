@@ -18,8 +18,12 @@ import android.widget.Toast;
 
 import com.qmuiteam.qmui.arch.QMUIFragment;
 import com.qmuiteam.qmui.arch.QMUIFragmentActivity;
+import com.qmuiteam.qmui.arch.annotation.DefaultFirstFragment;
+import com.qmuiteam.qmui.arch.annotation.FirstFragments;
+import com.qmuiteam.qmui.arch.annotation.LatestVisitRecord;
 import com.to3g.snipasteandroid.Listener.DoubleClickListener;
 import com.to3g.snipasteandroid.base.BaseFragmentActivity;
+import com.to3g.snipasteandroid.fragment.QDAboutFragment;
 import com.to3g.snipasteandroid.fragment.QDWebExplorerFragment;
 import com.yhao.floatwindow.FloatWindow;
 import com.yhao.floatwindow.MoveType;
@@ -28,6 +32,14 @@ import com.yhao.floatwindow.Screen;
 import static com.to3g.snipasteandroid.fragment.QDWebExplorerFragment.EXTRA_URL;
 import static com.to3g.snipasteandroid.fragment.QDWebExplorerFragment.EXTRA_TITLE;
 
+
+@FirstFragments(
+        value = {
+                QDWebExplorerFragment.class,
+                QDAboutFragment.class
+        })
+@DefaultFirstFragment(QDAboutFragment.class)
+@LatestVisitRecord
 public class QDMainActivity extends BaseFragmentActivity {
     LinearLayout mFloatLayout;
     private static final String TAG = "QDMainActivity";
@@ -40,9 +52,20 @@ public class QDMainActivity extends BaseFragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        prepare();
+//        setContentView(R.layout.activity_main);
+//        prepare();
     }
+
+    @Override
+    protected RootView onCreateRootView(int fragmentContainerId) {
+        return new CustomRootView(this, fragmentContainerId);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
 
     private void prepare () {
         LayoutInflater inflater = LayoutInflater.from(getApplication());
@@ -91,6 +114,11 @@ public class QDMainActivity extends BaseFragmentActivity {
         } else {
             Toast.makeText(this, "剪贴板为空", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public static Intent of(@NonNull Context context,
+                            @NonNull Class<? extends QMUIFragment> firstFragment) {
+        return QMUIFragmentActivity.intentOf(context, QDMainActivity.class, firstFragment);
     }
 
     public static Intent of(@NonNull Context context,

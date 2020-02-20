@@ -1,4 +1,6 @@
 def qmui_arch_version = '2.0.0-alpha02'
+def javaVersion = JavaVersion.VERSION_1_8
+
 
 apply plugin: 'com.android.application'
 
@@ -19,6 +21,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility javaVersion
+        targetCompatibility javaVersion
+    }
 }
 
 dependencies {
@@ -32,4 +38,5 @@ dependencies {
     implementation 'com.qmuiteam:qmui:2.0.0-alpha02'
     implementation "com.qmuiteam:arch:$qmui_arch_version"
     implementation "com.jakewharton:butterknife:$butterknifeVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$butterknifeVersion"
 }

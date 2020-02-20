@@ -17,6 +17,7 @@
 package com.to3g.snipasteandroid.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -46,12 +47,12 @@ import static com.to3g.snipasteandroid.fragment.QDWebExplorerFragment.EXTRA_TITL
  */
 public class QDAboutFragment extends BaseFragment {
 
-    @BindView(R.id.topbar)
-    QMUITopBarLayout mTopBar;
+    @BindView(R.id.topbar) QMUITopBarLayout mTopBar;
     @BindView(R.id.version) TextView mVersionTextView;
-    @BindView(R.id.about_list)
-    QMUIGroupListView mAboutGroupListView;
+    @BindView(R.id.about_list) QMUIGroupListView mAboutGroupListView;
     @BindView(R.id.copyright) TextView mCopyrightTextView;
+
+    private static final String TAG = "QDAboutFragment";
 
     @Override
     protected View onCreateView() {
