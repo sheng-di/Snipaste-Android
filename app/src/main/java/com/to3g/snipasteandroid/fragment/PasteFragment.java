@@ -16,12 +16,14 @@
 
 package com.to3g.snipasteandroid.fragment;
 
+import android.content.Context;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -177,18 +179,26 @@ public class PasteFragment extends BaseFragment {
     private View getPageView(ContentPage page) {
         View view = mPageMap.get(page);
         if (view == null) {
-            TextView textView = new TextView(getContext());
-            textView.setGravity(Gravity.CENTER);
-            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-            textView.setTextColor(ContextCompat.getColor(getContext(), R.color.app_color_description));
-
             if (page == ContentPage.Item1) {
-                textView.setText(R.string.tabSegment_item_1_content);
-            } else if (page == ContentPage.Item2) {
-                textView.setText(R.string.tabSegment_item_2_content);
-            }
+                // 第一个，使用自定义的View
+                LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                LinearLayout  linearLayout = (LinearLayout) inflater.inflate(R.layout.text_paste_page_view, null);
+                view = linearLayout;
+            } else {
 
-            view = textView;
+                TextView textView = new TextView(getContext());
+                textView.setGravity(Gravity.CENTER);
+                textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+                textView.setTextColor(ContextCompat.getColor(getContext(), R.color.app_color_description));
+
+                if (page == ContentPage.Item1) {
+                    textView.setText(R.string.tabSegment_item_1_content);
+                } else if (page == ContentPage.Item2) {
+                    textView.setText(R.string.tabSegment_item_2_content);
+                }
+
+                view = textView;
+            }
             mPageMap.put(page, view);
         }
         return view;
