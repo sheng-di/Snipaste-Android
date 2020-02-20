@@ -62,8 +62,6 @@ public class PasteFragment extends BaseFragment {
     QMUITabSegment mTabSegment;
     @BindView(R.id.contentViewPager)
     ViewPager mContentViewPager;
-    @BindView(R.id.textPasteListView)
-    QMUIGroupListView mGroupListView;
 
     private Map<ContentPage, View> mPageMap = new HashMap<>();
     private ContentPage mDestPage = ContentPage.Item1;
@@ -118,31 +116,30 @@ public class PasteFragment extends BaseFragment {
                 });
     }
 
-    private void initGroupListView() {
-        QMUICommonListItemView itemWithSwitch = mGroupListView.createItemView("Item 5");
-        itemWithSwitch.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_SWITCH);
-        itemWithSwitch.getSwitch().setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Toast.makeText(getActivity(), "checked = " + isChecked, Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        int size = QMUIDisplayHelper.dp2px(getContext(), 20);
-        QMUIGroupListView.newSection(getContext())
-                .setTitle("Section 1: 默认提供的样式")
-                .setDescription("Section 1 的描述")
-                .setLeftIconSize(size, ViewGroup.LayoutParams.WRAP_CONTENT)
-                .addItemView(itemWithSwitch, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                    }
-                })
-                .setMiddleSeparatorInset(QMUIDisplayHelper.dp2px(getContext(), 16), 0)
-                .addTo(mGroupListView);
-
-    }
+//    private void initGroupListView() {
+//        QMUICommonListItemView itemWithSwitch = mGroupListView.createItemView("Item 5");
+//        itemWithSwitch.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_SWITCH);
+//        itemWithSwitch.getSwitch().setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                Toast.makeText(getActivity(), "checked = " + isChecked, Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//
+//        int size = QMUIDisplayHelper.dp2px(getContext(), 20);
+//        QMUIGroupListView.newSection(getContext())
+//                .setTitle("Section 1: 默认提供的样式")
+//                .setDescription("Section 1 的描述")
+//                .setLeftIconSize(size, ViewGroup.LayoutParams.WRAP_CONTENT)
+//                .addItemView(itemWithSwitch, new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//
+//                    }
+//                })
+//                .setMiddleSeparatorInset(QMUIDisplayHelper.dp2px(getContext(), 16), 0)
+//                .addTo(mGroupListView);
+//    }
 
 
     private void initTabAndPager() {
