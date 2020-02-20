@@ -33,6 +33,7 @@ import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.to3g.snipasteandroid.QDApplication;
 import com.to3g.snipasteandroid.QDMainActivity;
 import com.to3g.snipasteandroid.fragment.QDAboutFragment;
+import com.to3g.snipasteandroid.fragment.QDTabSegmentFixModeFragment;
 
 /**
  * Created by cgspine on 2018/1/7.
@@ -72,7 +73,7 @@ public abstract class BaseFragment extends QMUIFragment {
 
     @Override
     public Object onLastFragmentFinish() {
-        return new QDAboutFragment();
+        return new QDTabSegmentFixModeFragment();
 
     }
 

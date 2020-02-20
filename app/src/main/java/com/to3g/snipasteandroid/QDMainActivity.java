@@ -24,6 +24,7 @@ import com.qmuiteam.qmui.arch.annotation.LatestVisitRecord;
 import com.to3g.snipasteandroid.Listener.DoubleClickListener;
 import com.to3g.snipasteandroid.base.BaseFragmentActivity;
 import com.to3g.snipasteandroid.fragment.QDAboutFragment;
+import com.to3g.snipasteandroid.fragment.QDTabSegmentFixModeFragment;
 import com.to3g.snipasteandroid.fragment.QDWebExplorerFragment;
 import com.yhao.floatwindow.FloatWindow;
 import com.yhao.floatwindow.MoveType;
@@ -36,9 +37,10 @@ import static com.to3g.snipasteandroid.fragment.QDWebExplorerFragment.EXTRA_TITL
 @FirstFragments(
         value = {
                 QDWebExplorerFragment.class,
-                QDAboutFragment.class
+                QDAboutFragment.class,
+                QDTabSegmentFixModeFragment.class
         })
-@DefaultFirstFragment(QDAboutFragment.class)
+@DefaultFirstFragment(QDTabSegmentFixModeFragment.class)
 @LatestVisitRecord
 public class QDMainActivity extends BaseFragmentActivity {
     LinearLayout mFloatLayout;

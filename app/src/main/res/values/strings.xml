@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SnipasteAndroid</string>
+    <string name="app_name">Snipaste</string>
     <string name="clipboard_button_text">剪贴板</string>
     <string name="default_text">默认文字</string>
 
@@ -11,4 +11,10 @@
     <string name="about_item_homepage">访问官网</string>
     <string name="about_item_github">GitHub</string>
     <string name="about_copyright">© %1$s QMUI Team All rights reserved.</string>
+
+    <!-- TabSegmentFragment 选项卡展示界面 -->
+    <string name="tabSegment_item_1_title">Item 1</string>
+    <string name="tabSegment_item_2_title">Item 2</string>
+    <string name="tabSegment_item_1_content">这是第一个 Item 的内容区</string>
+    <string name="tabSegment_item_2_content">这是第二个 Item 的内容区</string>
 </resources>
