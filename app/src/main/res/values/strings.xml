@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">SnipasteAndroid</string>
+    <string name="clipboard_button_text">剪贴板</string>
+    <string name="default_text">默认文字</string>
+
+    <string name="ok">OK</string>
+    <string name="cancel">CANCEL</string>
+
+    <!-- 关于界面 -->
+    <string name="about_title">关于</string>
+    <string name="about_item_homepage">访问官网</string>
+    <string name="about_item_github">GitHub</string>
+    <string name="about_copyright">© %1$s QMUI Team All rights reserved.</string>
 </resources>

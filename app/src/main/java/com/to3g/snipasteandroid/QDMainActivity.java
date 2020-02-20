@@ -1,10 +1,13 @@
 package com.to3g.snipasteandroid;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,14 +16,26 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.qmuiteam.qmui.arch.QMUIFragment;
+import com.qmuiteam.qmui.arch.QMUIFragmentActivity;
 import com.to3g.snipasteandroid.Listener.DoubleClickListener;
+import com.to3g.snipasteandroid.base.BaseFragmentActivity;
+import com.to3g.snipasteandroid.fragment.QDWebExplorerFragment;
 import com.yhao.floatwindow.FloatWindow;
 import com.yhao.floatwindow.MoveType;
 import com.yhao.floatwindow.Screen;
 
-public class MainActivity extends AppCompatActivity {
+import static com.to3g.snipasteandroid.fragment.QDWebExplorerFragment.EXTRA_URL;
+import static com.to3g.snipasteandroid.fragment.QDWebExplorerFragment.EXTRA_TITLE;
+
+public class QDMainActivity extends BaseFragmentActivity {
     LinearLayout mFloatLayout;
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "QDMainActivity";
+
+    @Override
+    protected int getContextViewId() {
+        return R.id.snipaste_demo;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,5 +91,18 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "剪贴板为空", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public static Intent of(@NonNull Context context,
+                            @NonNull Class<? extends QMUIFragment> firstFragment,
+                            @Nullable Bundle fragmentArgs) {
+        return QMUIFragmentActivity.intentOf(context, QDMainActivity.class, firstFragment, fragmentArgs);
+    }
+
+    public static Intent createWebExplorerIntent(Context context, String url, String title) {
+        Bundle bundle = new Bundle();
+        bundle.putString(EXTRA_URL, url);
+        bundle.putString(EXTRA_TITLE, title);
+        return of(context, QDWebExplorerFragment.class, bundle);
     }
 }

@@ -1,3 +1,5 @@
+def qmui_arch_version = '2.0.0-alpha02'
+
 apply plugin: 'com.android.application'
 
 android {
@@ -5,7 +7,7 @@ android {
     buildToolsVersion "29.0.3"
     defaultConfig {
         applicationId "com.to3g.snipasteandroid"
-        minSdkVersion 19
+        minSdkVersion 24
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -26,5 +28,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
-    compile 'com.github.yhaolpz:FloatWindow:1.0.9'
+    implementation 'com.github.yhaolpz:FloatWindow:1.0.9'
+    implementation 'com.qmuiteam:qmui:2.0.0-alpha02'
+    implementation "com.qmuiteam:arch:$qmui_arch_version"
+    implementation "com.jakewharton:butterknife:$butterknifeVersion"
 }

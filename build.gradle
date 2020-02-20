@@ -24,6 +24,10 @@ allprojects {
         jcenter()
         maven { url 'https://jitpack.io' }
     }
+
+    ext {
+        butterknifeVersion = '10.1.0'
+    }
 }
 
 task clean(type: Delete) {
