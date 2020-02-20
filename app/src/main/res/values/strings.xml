@@ -17,4 +17,8 @@
     <string name="tabSegment_item_2_title">Item 2</string>
     <string name="tabSegment_item_1_content">这是第一个 Item 的内容区</string>
     <string name="tabSegment_item_2_content">这是第二个 Item 的内容区</string>
+
+    <!--  Paste 界面上的TAB  -->
+    <string name="pasteSegment_tab_text">文本</string>
+    <string name="pasteSegment_tab_picture">图片</string>
 </resources>

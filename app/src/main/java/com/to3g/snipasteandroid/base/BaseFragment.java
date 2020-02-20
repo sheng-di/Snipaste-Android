@@ -32,6 +32,7 @@ import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.to3g.snipasteandroid.QDApplication;
 import com.to3g.snipasteandroid.QDMainActivity;
+import com.to3g.snipasteandroid.fragment.PasteFragment;
 import com.to3g.snipasteandroid.fragment.QDAboutFragment;
 import com.to3g.snipasteandroid.fragment.QDTabSegmentFixModeFragment;
 
@@ -73,7 +74,7 @@ public abstract class BaseFragment extends QMUIFragment {
 
     @Override
     public Object onLastFragmentFinish() {
-        return new QDTabSegmentFixModeFragment();
+        return new PasteFragment();
 
     }
 
