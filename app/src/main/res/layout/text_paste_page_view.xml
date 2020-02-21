@@ -22,6 +22,7 @@
         android:padding="6dp"
         android:layout_margin="10dp"
         android:background="@drawable/qmui_divider_bottom_bitmap"
+        android:maxHeight="200dp"
         android:inputType="textMultiLine" />
     <LinearLayout
         android:layout_width="match_parent"

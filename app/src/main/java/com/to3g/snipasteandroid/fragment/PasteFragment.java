@@ -17,12 +17,14 @@
 package com.to3g.snipasteandroid.fragment;
 
 import android.content.Context;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,6 +43,7 @@ import com.qmuiteam.qmui.widget.tab.QMUITabIndicator;
 import com.qmuiteam.qmui.widget.tab.QMUITabSegment;
 import com.to3g.snipasteandroid.R;
 import com.to3g.snipasteandroid.base.BaseFragment;
+import com.to3g.snipasteandroid.lib.ClipBoardUtil;
 import com.to3g.snipasteandroid.lib.Group;
 import com.to3g.snipasteandroid.lib.annotation.Widget;
 
@@ -64,6 +67,8 @@ public class PasteFragment extends BaseFragment {
     QMUITabSegment mTabSegment;
     @BindView(R.id.contentViewPager)
     ViewPager mContentViewPager;
+
+    private static final String TAG = "PasteFragment";
 
     private Map<ContentPage, View> mPageMap = new HashMap<>();
     private ContentPage mDestPage = ContentPage.Item1;
@@ -242,5 +247,18 @@ public class PasteFragment extends BaseFragment {
     @Override
     public Object onLastFragmentFinish() {
         return null;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        String content = ClipBoardUtil.get(getContext());
+        Log.d(TAG, "onResume: " + content);
+        if (content != null) {
+            LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LinearLayout  linearLayout = (LinearLayout) inflater.inflate(R.layout.text_paste_page_view, null);
+            EditText editText = linearLayout.findViewById(R.id.editText);
+            editText.setText(content);
+        }
     }
 }

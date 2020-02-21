@@ -23,6 +23,7 @@ import com.qmuiteam.qmui.arch.annotation.FirstFragments;
 import com.qmuiteam.qmui.arch.annotation.LatestVisitRecord;
 import com.to3g.snipasteandroid.Listener.DoubleClickListener;
 import com.to3g.snipasteandroid.base.BaseFragmentActivity;
+import com.to3g.snipasteandroid.fragment.HomeFragment;
 import com.to3g.snipasteandroid.fragment.PasteFragment;
 import com.to3g.snipasteandroid.fragment.QDAboutFragment;
 import com.to3g.snipasteandroid.fragment.QDTabSegmentFixModeFragment;
@@ -40,9 +41,10 @@ import static com.to3g.snipasteandroid.fragment.QDWebExplorerFragment.EXTRA_TITL
                 QDWebExplorerFragment.class,
                 QDAboutFragment.class,
                 QDTabSegmentFixModeFragment.class,
-                PasteFragment.class
+                PasteFragment.class,
+                HomeFragment.class
         })
-@DefaultFirstFragment(PasteFragment.class)
+@DefaultFirstFragment(HomeFragment.class)
 @LatestVisitRecord
 public class QDMainActivity extends BaseFragmentActivity {
     LinearLayout mFloatLayout;

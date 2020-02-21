@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.qmuiteam.qmui.widget.QMUIWindowInsetLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/qmui_config_color_white">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/qmui_topbar_height"
+        android:fillViewport="true"
+        android:fitsSystemWindows="true"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="25dp"
+            >
+            <TextView
+                android:id="@+id/home_title1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/pasteSectionTitle1"
+                android:background="#F4F5F8"
+                android:textColor="#666666"
+                android:padding="10dp"/>
+
+
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:gravity="start|top"
+                android:hint="@string/pasteTextEditHint"
+                android:padding="6dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/qmui_divider_bottom_bitmap"
+                android:maxHeight="200dp"
+                android:inputType="textMultiLine" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="right"
+                >
+                <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/pasteTextButton"
+                    android:text="@string/pasteTextButtonText"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:layout_margin="10dp"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <com.qmuiteam.qmui.widget.QMUITopBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/topbar"
+        android:fitsSystemWindows="true"/>
+</com.qmuiteam.qmui.widget.QMUIWindowInsetLayout>
