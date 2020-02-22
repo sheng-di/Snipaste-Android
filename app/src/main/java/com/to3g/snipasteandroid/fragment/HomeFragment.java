@@ -41,9 +41,6 @@ public class HomeFragment extends BaseFragment {
 
     private static final String TAG = "HomeFragment";
 
-    @BindView(R.id.home_title1)
-    TextView titleView1;
-
     @BindView(R.id.editText)
     EditText editText;
 
@@ -55,6 +52,12 @@ public class HomeFragment extends BaseFragment {
 
     @BindView(R.id.topbar)
     QMUITopBarLayout mTopBar;
+
+    @BindView(R.id.albumButton)
+    QMUIRoundButton albumButton;
+
+    @BindView(R.id.cameraButton)
+    QMUIRoundButton cameraButton;
 
     List<String> floatings = new ArrayList<>();
 
@@ -72,9 +75,23 @@ public class HomeFragment extends BaseFragment {
         pasteTextButton.setOnClickListener(v -> {
             onPasteTextButtonClick();
         });
+        cameraButton.setOnClickListener(v -> {
+            onCameraButtonClick();
+        });
+        albumButton.setOnClickListener(v -> {
+            onAlbumButtonClick();
+        });
         // 初始化图片窗口
         initImageView();
         return root;
+    }
+
+    private void onCameraButtonClick () {
+
+    }
+
+    private void onAlbumButtonClick () {
+
     }
 
     private void initImageView() {

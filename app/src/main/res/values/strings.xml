@@ -28,4 +28,8 @@
     <string name="clear_all_text">关闭所有文字</string>
     <string name="paste_title_2">贴图片</string>
     <string name="paste_on_screen">贴在屏幕上</string>
+    <string name="album">相册</string>
+    <string name="cameraText">相机</string>
+    <string name="setting">设置</string>
+    <string name="help">帮助</string>
 </resources>

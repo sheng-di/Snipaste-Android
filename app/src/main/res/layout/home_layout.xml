@@ -22,7 +22,6 @@
             android:paddingBottom="25dp"
             >
             <TextView
-                android:id="@+id/home_title1"
                 android:text="@string/pasteSectionTitle1"
                 style="@style/TitleText"/>
             <EditText
@@ -60,8 +59,34 @@
                     />
             </LinearLayout>
             <TextView
-                android:id="@+id/home_title2"
                 android:text="@string/paste_title_2"
+                style="@style/TitleText"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="start"
+                >
+                <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/albumButton"
+                    android:text="@string/album"
+                    style="@style/NormalButton"
+                    />
+                <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/cameraButton"
+                    android:text="@string/cameraText"
+                    style="@style/NormalButton"
+                    />
+            </LinearLayout>
+            <TextView
+                android:text="@string/setting"
+                style="@style/TitleText"/>
+            <TextView
+                android:text="@string/help"
                 style="@style/TitleText"/>
         </LinearLayout>
     </ScrollView>
