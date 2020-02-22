@@ -8,10 +8,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.core.content.PermissionChecker;
+
 import com.lzf.easyfloat.EasyFloat;
 import com.lzf.easyfloat.enums.ShowPattern;
+import com.lzf.easyfloat.permission.PermissionUtils;
 import com.qmuiteam.qmui.arch.annotation.LatestVisitRecord;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
+import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
+import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;
 import com.to3g.snipasteandroid.Listener.DoubleClickListener;
 import com.to3g.snipasteandroid.R;
@@ -20,6 +25,7 @@ import com.to3g.snipasteandroid.lib.ClipBoardUtil;
 import com.to3g.snipasteandroid.lib.Group;
 import com.to3g.snipasteandroid.lib.annotation.Widget;
 
+import java.security.Permission;
 import java.util.Objects;
 
 import butterknife.BindView;
@@ -68,13 +74,14 @@ public class HomeFragment extends BaseFragment {
     }
 
     private void onPasteClickboardButtonClick () {
-        String content = ClipBoardUtil.get(getContext());
+        String content = ClipBoardUtil.get(Objects.requireNonNull(getContext()));
         Log.d(TAG, "剪切板内容: " + content);
         editText.setText(content);
         floatText(content);
     }
 
-    private void floatText(String content) {
+    private void showFloatText (String content) {
+        // 查看是否已经创建过这个弹窗
         View view = EasyFloat.getAppFloatView(content);
         if (content == null || content.equals("")) {
             Toast.makeText(getContext(), "内容为空", Toast.LENGTH_SHORT).show();
@@ -103,6 +110,38 @@ public class HomeFragment extends BaseFragment {
             }
         });
         textView.setText(content);
+    }
+
+    private void floatText(String content) {
+        // 检查权限
+        if (PermissionUtils.checkPermission(Objects.requireNonNull(getContext()))) {
+            showFloatText(content);
+        } else {
+            // 提示用户要申请权限了
+            new QMUIDialog.MessageDialogBuilder(getActivity())
+//                    .setTitle("标题")
+                    .setMessage("使用浮窗功能，需要您授予悬浮窗权限。")
+                    .addAction("取消", new QMUIDialogAction.ActionListener() {
+                        @Override
+                        public void onClick(QMUIDialog dialog, int index) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .addAction(0, "去开启", QMUIDialogAction.ACTION_PROP_POSITIVE, new QMUIDialogAction.ActionListener() {
+                        @Override
+                        public void onClick(QMUIDialog dialog, int index) {
+                            dialog.dismiss();
+                            PermissionUtils.requestPermission(getActivity(), result -> {
+                                if(result) {
+                                    showFloatText(content);
+                                } else {
+                                    Toast.makeText(getContext(), "需要悬浮窗权限才能悬浮", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    })
+                    .create(R.style.QMUI_Dialog).show();
+        }
     }
 
     private void initTopBar() {
