@@ -48,14 +48,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/pasteTextButton"
-                    android:text="@string/pasteTextButtonText"
+                    android:text="@string/paste_on_screen"
                     style="@style/NormalButton"
                     />
                 <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/clearButton"
-                    android:text="@string/clear_all_text"
+                    android:id="@+id/pasteClipboardButton"
+                    android:text="@string/pasteTextButtonText"
                     style="@style/NormalButton"
                     />
             </LinearLayout>

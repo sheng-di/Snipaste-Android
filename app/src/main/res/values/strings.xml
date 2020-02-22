@@ -21,10 +21,11 @@
     <!--  Paste 界面上的TAB  -->
     <string name="pasteSegment_tab_text">文本</string>
     <string name="pasteSegment_tab_picture">图片</string>
-    <string name="pasteTextButtonText">粘贴在屏幕上</string>
+    <string name="pasteTextButtonText">贴剪贴板文字</string>
     <string name="pasteSectionTitle1">贴文字</string>
-    <string name="pasteTextEditHint">输入文字...</string>
+    <string name="pasteTextEditHint">输入文字…</string>
     <string name="button_clear_text">清空</string>
     <string name="clear_all_text">关闭所有文字</string>
     <string name="paste_title_2">贴图片</string>
+    <string name="paste_on_screen">贴在屏幕上</string>
 </resources>
