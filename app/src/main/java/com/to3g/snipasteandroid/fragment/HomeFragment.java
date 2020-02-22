@@ -8,8 +8,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.core.content.PermissionChecker;
-
 import com.lzf.easyfloat.EasyFloat;
 import com.lzf.easyfloat.enums.ShowPattern;
 import com.lzf.easyfloat.permission.PermissionUtils;
@@ -25,7 +23,8 @@ import com.to3g.snipasteandroid.lib.ClipBoardUtil;
 import com.to3g.snipasteandroid.lib.Group;
 import com.to3g.snipasteandroid.lib.annotation.Widget;
 
-import java.security.Permission;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import butterknife.BindView;
@@ -51,6 +50,8 @@ public class HomeFragment extends BaseFragment {
 
     @BindView(R.id.topbar)
     QMUITopBarLayout mTopBar;
+
+    List<String> floatings = new ArrayList<>();
 
     @Override
     protected View onCreateView() {
@@ -100,6 +101,7 @@ public class HomeFragment extends BaseFragment {
                 .setLocation(100, 200)
                 .setTag(content)
                 .show();
+        floatings.add(content);
         view = EasyFloat.getAppFloatView(content);
         assert view != null;
         TextView textView = view.findViewById(R.id.textView);
@@ -107,6 +109,7 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onDoubleClick(View v) {
                 EasyFloat.dismissAppFloat(content);
+                floatings.remove(content);
             }
         });
         textView.setText(content);
@@ -119,7 +122,6 @@ public class HomeFragment extends BaseFragment {
         } else {
             // 提示用户要申请权限了
             new QMUIDialog.MessageDialogBuilder(getActivity())
-//                    .setTitle("标题")
                     .setMessage("使用浮窗功能，需要您授予悬浮窗权限。")
                     .addAction("取消", new QMUIDialogAction.ActionListener() {
                         @Override
@@ -147,7 +149,20 @@ public class HomeFragment extends BaseFragment {
     private void initTopBar() {
         mTopBar.setTitle(getString(R.string.app_name));
         mTopBar.addRightImageButton(R.mipmap.icon_topbar_overflow, R.id.topbar_right_change_button)
-                .setOnClickListener(v -> Toast.makeText(getContext(), "点击干嘛", Toast.LENGTH_SHORT).show());
+                .setOnClickListener(v -> {
+                   clearAllTextFloatViews();
+                });
+    }
+
+    /**
+     * 清空所有文本悬浮
+     */
+    private void clearAllTextFloatViews () {
+        for (String content : floatings) {
+            if (EasyFloat.getAppFloatView(content) != null) {
+                EasyFloat.dismissAppFloat(content);
+            }
+        }
     }
 
     @Override
