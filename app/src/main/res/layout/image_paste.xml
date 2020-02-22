@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.qmuiteam.qmui.alpha.QMUIAlphaLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:background="#e3e3e3"
+
+<RelativeLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:id="@+id/imageOutter"
+android:layout_width="100dp"
+android:layout_height="100dp"
+android:background="@mipmap/about_logo"
     >
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/imageView" />
-
-</com.qmuiteam.qmui.alpha.QMUIAlphaLinearLayout>
+<com.to3g.snipasteandroid.view.ScaleImage
+    android:id="@+id/scaleImage"
+    android:layout_width="20dp"
+    android:layout_height="20dp"
+    android:src="@mipmap/icon_theme"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentEnd="true"
+    />
+</RelativeLayout>

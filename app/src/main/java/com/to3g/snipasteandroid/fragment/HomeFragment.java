@@ -3,6 +3,7 @@ package com.to3g.snipasteandroid.fragment;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -24,6 +25,8 @@ import com.to3g.snipasteandroid.base.BaseFragment;
 import com.to3g.snipasteandroid.lib.ClipBoardUtil;
 import com.to3g.snipasteandroid.lib.Group;
 import com.to3g.snipasteandroid.lib.annotation.Widget;
+import com.to3g.snipasteandroid.view.ScaleImage;
+import com.to3g.snipasteandroid.Listener.DoubleClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,12 +87,33 @@ public class HomeFragment extends BaseFragment {
                 .show();
         View view = EasyFloat.getAppFloatView("image");
         assert view != null;
-        ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+        View imageOutter = view.findViewById(R.id.imageOutter);
+        ViewGroup.LayoutParams layoutParams = imageOutter.getLayoutParams();
         layoutParams.width = 300;
         layoutParams.height = 300;
         view.setLayoutParams(layoutParams);
-        ImageView imageView = view.findViewById(R.id.imageView);
-        imageView.setImageResource(R.drawable.ic_launcher);
+
+        ScaleImage scaleImage = view.findViewById(R.id.scaleImage);
+        scaleImage.onScaledListener = new ScaleImage.OnScaledListener() {
+            @Override
+            public void onScaled(float x, float y, MotionEvent event) {
+                layoutParams.width = (int) (layoutParams.width + x);
+                layoutParams.height = (int) (layoutParams.height + y);
+                Log.d(TAG, String.format("onScaled: %d, %d", layoutParams.width, layoutParams.height));
+                imageOutter.setLayoutParams(layoutParams);
+            }
+
+            @Override
+            public void onScaleChange(float scaleFactor, float focusX, float focusY) {
+
+            }
+        };
+        view.setOnClickListener(new DoubleClickListener() {
+            @Override
+            public void onDoubleClick(View v) {
+                EasyFloat.dismissAppFloat("image");
+            }
+        });
     }
 
     private void onPasteTextButtonClick () {
