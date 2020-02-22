@@ -29,6 +29,7 @@ import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
 import com.to3g.snipasteandroid.R;
 import com.to3g.snipasteandroid.base.BaseFragment;
+import com.to3g.snipasteandroid.lib.ClipBoardUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -116,5 +117,15 @@ public class QDAboutFragment extends BaseFragment {
     @Override
     protected SwipeBackLayout.ViewMoveAction dragViewMoveAction() {
         return SwipeBackLayout.MOVE_VIEW_TOP_TO_BOTTOM;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        String content = ClipBoardUtil.get(getContext());
+        Log.d(TAG, "onResume: " + content);
+//        if (content != null) {
+//            editText.setText(content);
+//        }
     }
 }

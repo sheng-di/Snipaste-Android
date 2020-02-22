@@ -3,9 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/home_layout_outter"
     android:background="@color/qmui_config_color_white">
 
     <ScrollView
+        android:id="@+id/scrollView1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="?attr/qmui_topbar_height"
@@ -13,6 +15,7 @@
         android:fitsSystemWindows="true"
         >
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -41,10 +44,11 @@
                 android:maxHeight="200dp"
                 android:inputType="textMultiLine" />
             <LinearLayout
+                android:id="@+id/linearLayout2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="right"
+                android:gravity="end"
                 >
                 <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
                     android:layout_width="wrap_content"

@@ -6,7 +6,7 @@ import android.content.Context;
 
 public class ClipBoardUtil {
     public static String get (Context context) {
-        ClipboardManager clipboardManager = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+        final ClipboardManager clipboardManager = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
         assert clipboardManager != null;
         ClipData clipData = clipboardManager.getPrimaryClip();
         if (clipData != null && clipData.getItemCount() > 0) {

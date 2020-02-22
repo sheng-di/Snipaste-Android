@@ -1,9 +1,13 @@
 package com.to3g.snipasteandroid.fragment;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -12,8 +16,11 @@ import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;
 import com.to3g.snipasteandroid.R;
 import com.to3g.snipasteandroid.base.BaseFragment;
+import com.to3g.snipasteandroid.lib.ClipBoardUtil;
 import com.to3g.snipasteandroid.lib.Group;
 import com.to3g.snipasteandroid.lib.annotation.Widget;
+
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,17 +38,24 @@ public class HomeFragment extends BaseFragment {
     EditText editText;
 
     @BindView(R.id.pasteTextButton)
-    QMUIRoundButton buttonPasteText;
+    QMUIRoundButton pasteTextButton;
 
     @BindView(R.id.topbar)
     QMUITopBarLayout mTopBar;
 
     @Override
     protected View onCreateView() {
-        View root = LayoutInflater.from(getActivity()).inflate(R.layout.home_layout, null);
+        View root = LayoutInflater.from(getContext()).inflate(R.layout.home_layout, null);
         ButterKnife.bind(this, root);
         titleView1.setText("这是动态设置的标题");
         initTopBar();
+        pasteTextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String content = ClipBoardUtil.get(getContext());
+                Log.d(TAG, "剪切板内容: " + content);
+            }
+        });
         return root;
     }
 
@@ -64,5 +78,13 @@ public class HomeFragment extends BaseFragment {
     @Override
     protected boolean canDragBack(Context context, int dragDirection, int moveEdge) {
         return false;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+//        if (content != null) {
+//            editText.setText(content);
+//        }
     }
 }
