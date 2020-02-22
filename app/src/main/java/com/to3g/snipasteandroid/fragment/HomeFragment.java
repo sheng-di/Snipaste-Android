@@ -4,6 +4,8 @@ import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +24,7 @@ import com.to3g.snipasteandroid.base.BaseFragment;
 import com.to3g.snipasteandroid.lib.ClipBoardUtil;
 import com.to3g.snipasteandroid.lib.Group;
 import com.to3g.snipasteandroid.lib.annotation.Widget;
+import com.to3g.snipasteandroid.view.GestureImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,7 +70,27 @@ public class HomeFragment extends BaseFragment {
         pasteTextButton.setOnClickListener(v -> {
             onPasteTextButtonClick();
         });
+        // 初始化图片窗口
+        initImageView();
         return root;
+    }
+
+    private void initImageView() {
+        EasyFloat
+                .with(Objects.requireNonNull(getActivity()))
+                .setLayout(R.layout.image_paste)
+                .setShowPattern(ShowPattern.ALL_TIME)
+                .setLocation(100, 200)
+                .setTag("image")
+                .show();
+        View view = EasyFloat.getAppFloatView("image");
+        assert view != null;
+        ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+        layoutParams.width = 300;
+        layoutParams.height = 300;
+        view.setLayoutParams(layoutParams);
+        GestureImageView gestureImageView = view.findViewById(R.id.imageView);
+        gestureImageView.setImageResource(R.drawable.ic_launcher);
     }
 
     private void onPasteTextButtonClick () {

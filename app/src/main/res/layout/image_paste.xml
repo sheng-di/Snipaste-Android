@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.qmuiteam.qmui.alpha.QMUIAlphaLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#e3e3e3"
+    >
+
+    <com.to3g.snipasteandroid.view.GestureImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView" />
+
+</com.qmuiteam.qmui.alpha.QMUIAlphaLinearLayout>
