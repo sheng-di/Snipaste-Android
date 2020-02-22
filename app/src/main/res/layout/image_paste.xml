@@ -5,9 +5,9 @@
     android:background="#e3e3e3"
     >
 
-    <com.to3g.snipasteandroid.view.GestureImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:id="@+id/imageView" />
 
 </com.qmuiteam.qmui.alpha.QMUIAlphaLinearLayout>

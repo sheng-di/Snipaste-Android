@@ -5,8 +5,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,7 +24,6 @@ import com.to3g.snipasteandroid.base.BaseFragment;
 import com.to3g.snipasteandroid.lib.ClipBoardUtil;
 import com.to3g.snipasteandroid.lib.Group;
 import com.to3g.snipasteandroid.lib.annotation.Widget;
-import com.to3g.snipasteandroid.view.GestureImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,8 +88,8 @@ public class HomeFragment extends BaseFragment {
         layoutParams.width = 300;
         layoutParams.height = 300;
         view.setLayoutParams(layoutParams);
-        GestureImageView gestureImageView = view.findViewById(R.id.imageView);
-        gestureImageView.setImageResource(R.drawable.ic_launcher);
+        ImageView imageView = view.findViewById(R.id.imageView);
+        imageView.setImageResource(R.drawable.ic_launcher);
     }
 
     private void onPasteTextButtonClick () {
