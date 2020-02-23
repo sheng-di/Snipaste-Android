@@ -73,7 +73,8 @@ public class HomeFragment extends BaseFragment {
     @BindView(R.id.cameraButton)
     QMUIRoundButton cameraButton;
 
-    List<String> floatings = new ArrayList<>();
+    private List<String> floatings = new ArrayList<>();
+    private List<String> floatingImages = new ArrayList<>();
 
     @Override
     protected View onCreateView() {
@@ -155,9 +156,10 @@ public class HomeFragment extends BaseFragment {
                 .setLayout(R.layout.image_paste)
                 .setShowPattern(ShowPattern.ALL_TIME)
                 .setLocation(100, 200)
-                .setTag("image")
+                .setTag(path)
                 .show();
-        View view = EasyFloat.getAppFloatView("image");
+        floatingImages.add(path);
+        View view = EasyFloat.getAppFloatView(path);
         assert view != null;
         View imageOutter = view.findViewById(R.id.imageOutter);
         View imageOutterShadow = view.findViewById(R.id.imageOutterShadow);
@@ -184,7 +186,8 @@ public class HomeFragment extends BaseFragment {
         view.setOnClickListener(new DoubleClickListener() {
             @Override
             public void onDoubleClick(View v) {
-                EasyFloat.dismissAppFloat("image");
+                EasyFloat.dismissAppFloat(path);
+                floatingImages.remove(path);
             }
         });
     }
