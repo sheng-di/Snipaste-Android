@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.qmuiteam.qmui.alpha.QMUIAlphaLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.dd.ShadowLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="#e3e3e3"
-    >
-
-    <TextView
-        android:id="@+id/textView"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:sl_dx="0dp"
+    app:sl_shadowColor="#33000000"
+    app:sl_shadowRadius="4dp">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="4dp"
-        android:text="@string/default_text" />
-</com.qmuiteam.qmui.alpha.QMUIAlphaLinearLayout>
+        android:layout_height="match_parent"
+        android:background="#e3e3e3"
+        >
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="@string/default_text" />
+    </LinearLayout>
+</com.dd.ShadowLayout>

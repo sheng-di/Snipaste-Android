@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:sl_dx="0dp"
-    app:sl_shadowColor="#AA000000"
+    app:sl_shadowColor="#33000000"
     app:sl_shadowRadius="4dp"
     android:minWidth="50dp"
     android:minHeight="50dp">
