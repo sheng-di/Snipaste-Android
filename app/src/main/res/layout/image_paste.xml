@@ -18,7 +18,7 @@
             android:id="@+id/scaleImage"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@mipmap/icon_theme"
+            android:src="@drawable/ic_scaleimage"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             />
