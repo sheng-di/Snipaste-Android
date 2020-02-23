@@ -82,7 +82,7 @@ public class HomeFragment extends BaseFragment {
 
     private List<String> floatings = new ArrayList<>();
     private List<String> floatingImages = new ArrayList<>();
-    private float opacity;
+    private float opacity = 1.0f;
 
     @Override
     protected View onCreateView() {
@@ -119,7 +119,13 @@ public class HomeFragment extends BaseFragment {
         for (String content: floatings) {
             View view = EasyFloat.getAppFloatView(content);
             if (view != null) {
-                view.findViewById(R.id.textBackground).getBackground().setAlpha((int) (opacity * 255));
+                view.findViewById(R.id.textBackground).setAlpha(opacity);
+            }
+        }
+        for (String path: floatingImages) {
+            View view = EasyFloat.getAppFloatView(path);
+            if (view != null) {
+                view.findViewById(R.id.imageOutterShadow).setAlpha(opacity);
             }
         }
     }
