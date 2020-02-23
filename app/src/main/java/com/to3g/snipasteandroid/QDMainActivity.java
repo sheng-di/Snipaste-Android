@@ -3,17 +3,9 @@ package com.to3g.snipasteandroid;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import android.content.ClipData;
-import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.qmuiteam.qmui.arch.QMUIFragment;
 import com.qmuiteam.qmui.arch.QMUIFragmentActivity;
@@ -26,7 +18,6 @@ import com.to3g.snipasteandroid.fragment.PasteFragment;
 import com.to3g.snipasteandroid.fragment.QDAboutFragment;
 import com.to3g.snipasteandroid.fragment.QDTabSegmentFixModeFragment;
 import com.to3g.snipasteandroid.fragment.QDWebExplorerFragment;
-import com.to3g.snipasteandroid.lib.ClipBoardUtil;
 
 import static com.to3g.snipasteandroid.fragment.QDWebExplorerFragment.EXTRA_URL;
 import static com.to3g.snipasteandroid.fragment.QDWebExplorerFragment.EXTRA_TITLE;

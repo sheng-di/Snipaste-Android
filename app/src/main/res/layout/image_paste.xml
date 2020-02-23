@@ -1,18 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/imageOutter"
+<com.dd.ShadowLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/imageOutterShadow"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    app:sl_dx="0dp"
+    app:sl_shadowColor="#AA000000"
+    app:sl_shadowRadius="4dp"
     android:minWidth="50dp"
-    android:minHeight="50dp"
+    android:minHeight="50dp">
+    <RelativeLayout
+        android:id="@+id/imageOutter"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         >
-    <com.to3g.snipasteandroid.view.ScaleImage
-        android:id="@+id/scaleImage"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:src="@mipmap/icon_theme"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        />
-</RelativeLayout>
+        <com.to3g.snipasteandroid.view.ScaleImage
+            android:id="@+id/scaleImage"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/icon_theme"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            />
+    </RelativeLayout>
+</com.dd.ShadowLayout>

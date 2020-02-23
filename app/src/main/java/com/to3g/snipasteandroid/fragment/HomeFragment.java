@@ -134,7 +134,6 @@ public class HomeFragment extends BaseFragment {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int screenWidth = displayMetrics.widthPixels;
-        int screenHeight = displayMetrics.heightPixels;
 
         // 获取图片宽高
         Size size = ImageUtil.getImageSize(path);
@@ -161,9 +160,10 @@ public class HomeFragment extends BaseFragment {
         View view = EasyFloat.getAppFloatView("image");
         assert view != null;
         View imageOutter = view.findViewById(R.id.imageOutter);
+        View imageOutterShadow = view.findViewById(R.id.imageOutterShadow);
 
-        ViewGroup.LayoutParams layoutParams = imageOutter.getLayoutParams();
-        imageOutter.setLayoutParams(getDefaultParams(path, layoutParams));
+        ViewGroup.LayoutParams layoutParams = imageOutterShadow.getLayoutParams();
+        imageOutterShadow.setLayoutParams(getDefaultParams(path, layoutParams));
 
         imageOutter.setBackground(Drawable.createFromPath(path));
 
@@ -173,7 +173,7 @@ public class HomeFragment extends BaseFragment {
             public void onScaled(float x, float y, MotionEvent event) {
                 layoutParams.width = (int) (layoutParams.width + x);
                 layoutParams.height = (int) (layoutParams.height + y);
-                imageOutter.setLayoutParams(layoutParams);
+                imageOutterShadow.setLayoutParams(layoutParams);
             }
 
             @Override
