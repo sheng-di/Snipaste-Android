@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.dd.ShadowLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/shadowLayout"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:sl_dx="0dp"
-    app:sl_shadowColor="#33000000"
+    app:sl_shadowColor="#aaaaaa"
     app:sl_shadowRadius="4dp">
     <LinearLayout
+        android:id="@+id/textBackground"
+        android:background="#e3e3e3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#e3e3e3"
         >
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="#000000"
             android:padding="4dp"
             android:text="@string/default_text" />
     </LinearLayout>

@@ -32,6 +32,7 @@ import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;
+import com.ramotion.fluidslider.FluidSlider;
 import com.to3g.snipasteandroid.Listener.DoubleClickListener;
 import com.to3g.snipasteandroid.R;
 import com.to3g.snipasteandroid.base.BaseFragment;
@@ -50,6 +51,7 @@ import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import kotlin.Unit;
 
 @LatestVisitRecord
 @Widget(group = Group.Other, name = "Home")
@@ -75,9 +77,12 @@ public class HomeFragment extends BaseFragment {
     @BindView(R.id.cameraButton)
     QMUIRoundButton cameraButton;
 
+    @BindView(R.id.slider)
+    FluidSlider slider;
+
     private List<String> floatings = new ArrayList<>();
     private List<String> floatingImages = new ArrayList<>();
-    private int opacity = 100;
+    private float opacity;
 
     @Override
     protected View onCreateView() {
@@ -99,9 +104,24 @@ public class HomeFragment extends BaseFragment {
         albumButton.setOnClickListener(v -> {
             onAlbumButtonClick();
         });
-        // 初始化图片窗口
-//        initImageView();
+        slider.setPosition(1);
+        slider.setPositionListener(pos -> {
+            Log.d(TAG, "onCreateView: " + pos);
+            opacity = pos;
+            setFloatViewOpacity();
+            return Unit.INSTANCE;
+        });
+        setFloatViewOpacity();
         return root;
+    }
+
+    private void setFloatViewOpacity () {
+        for (String content: floatings) {
+            View view = EasyFloat.getAppFloatView(content);
+            if (view != null) {
+                view.findViewById(R.id.textBackground).getBackground().setAlpha((int) (opacity * 255));
+            }
+        }
     }
 
     /**
@@ -212,6 +232,7 @@ public class HomeFragment extends BaseFragment {
                 floatingImages.remove(path);
             }
         });
+        setFloatViewOpacity();
     }
 
     private void onPasteTextButtonClick () {
@@ -257,6 +278,7 @@ public class HomeFragment extends BaseFragment {
             }
         });
         textView.setText(content);
+        setFloatViewOpacity();
     }
 
     private void floatText(String content) {
