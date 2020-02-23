@@ -19,7 +19,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="25dp"
             >
             <TextView
                 android:text="@string/pasteSectionTitle1"
@@ -83,11 +82,30 @@
                     />
             </LinearLayout>
             <TextView
-                android:text="@string/setting"
-                style="@style/TitleText"/>
-            <TextView
                 android:text="@string/help"
                 style="@style/TitleText"/>
+            <TextView
+                android:text="@string/helpText"
+                android:layout_margin="10dp"
+                android:textColor="#999999"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <LinearLayout
+                android:gravity="bottom"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <com.ramotion.fluidslider.FluidSlider
+                    app:start_text="透明"
+                    app:end_text="不透明"
+                    android:id="@+id/slider"
+                    app:bar_color="#eeeeee"
+                    app:bubble_text_color="@color/picture_color_white"
+                    app:bubble_color="#00a7e6"
+                    app:bar_text_color="#666666"
+                    app:size="normal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

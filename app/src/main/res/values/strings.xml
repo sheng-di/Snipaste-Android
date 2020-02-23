@@ -32,4 +32,6 @@
     <string name="cameraText">相机</string>
     <string name="setting">设置</string>
     <string name="help">帮助</string>
+    <string name="opacity">不透明度</string>
+    <string name="helpText">双击浮窗可以关闭</string>
 </resources>

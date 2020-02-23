@@ -46,4 +46,5 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
     implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.4.6'
     implementation 'com.github.dmytrodanylyk.shadow-layout:library:1.0.3'
+    implementation 'com.ramotion.fluidslider:fluid-slider:0.3.1'
 }
