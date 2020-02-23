@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Picture;
 import android.graphics.drawable.Drawable;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -126,6 +127,28 @@ public class HomeFragment extends BaseFragment {
                 });
     }
 
+    private ViewGroup.LayoutParams getDefaultParams (String path, ViewGroup.LayoutParams layoutParams) {
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int screenWidth = displayMetrics.widthPixels;
+        int screenHeight = displayMetrics.heightPixels;
+
+        // 获取图片宽高
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(path, options);
+        int imgWidth = options.outWidth;
+        int imgHeight = options.outHeight;
+        Log.d(TAG, String.format("initImageView: 图片大小：%d, %d", imgWidth, imgHeight));
+
+        float rate = 0.8f;
+
+        layoutParams.width = (int) (rate * screenWidth);
+        layoutParams.height = (int) (layoutParams.width * 1.0f / imgWidth * imgHeight);
+        return layoutParams;
+    }
+
     private void initImageView(String path) {
         EasyFloat
                 .with(Objects.requireNonNull(getActivity()))
@@ -137,10 +160,11 @@ public class HomeFragment extends BaseFragment {
         View view = EasyFloat.getAppFloatView("image");
         assert view != null;
         View imageOutter = view.findViewById(R.id.imageOutter);
+
+
+
         ViewGroup.LayoutParams layoutParams = imageOutter.getLayoutParams();
-        layoutParams.width = 300;
-        layoutParams.height = 300;
-        view.setLayoutParams(layoutParams);
+        view.setLayoutParams(getDefaultParams(path, layoutParams));
         view.setBackground(Drawable.createFromPath(path));
 
         ScaleImage scaleImage = view.findViewById(R.id.scaleImage);
