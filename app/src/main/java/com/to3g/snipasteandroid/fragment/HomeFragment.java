@@ -7,6 +7,7 @@ import android.graphics.Picture;
 import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.Size;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -35,6 +36,7 @@ import com.to3g.snipasteandroid.base.BaseFragment;
 import com.to3g.snipasteandroid.lib.ClipBoardUtil;
 import com.to3g.snipasteandroid.lib.GlideEngine;
 import com.to3g.snipasteandroid.lib.Group;
+import com.to3g.snipasteandroid.lib.ImageUtil;
 import com.to3g.snipasteandroid.lib.annotation.Widget;
 import com.to3g.snipasteandroid.view.ScaleImage;
 import com.to3g.snipasteandroid.Listener.DoubleClickListener;
@@ -135,17 +137,16 @@ public class HomeFragment extends BaseFragment {
         int screenHeight = displayMetrics.heightPixels;
 
         // 获取图片宽高
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        BitmapFactory.decodeFile(path, options);
-        int imgWidth = options.outWidth;
-        int imgHeight = options.outHeight;
+        Size size = ImageUtil.getImageSize(path);
+        int imgWidth = size.getWidth();
+        int imgHeight = size.getHeight();
         Log.d(TAG, String.format("initImageView: 图片大小：%d, %d", imgWidth, imgHeight));
 
         float rate = 0.8f;
 
         layoutParams.width = (int) (rate * screenWidth);
         layoutParams.height = (int) (layoutParams.width * 1.0f / imgWidth * imgHeight);
+        Log.d(TAG, String.format("initImageView: layout 大小：%d, %d", layoutParams.width, layoutParams.height));
         return layoutParams;
     }
 
@@ -161,11 +162,10 @@ public class HomeFragment extends BaseFragment {
         assert view != null;
         View imageOutter = view.findViewById(R.id.imageOutter);
 
-
-
         ViewGroup.LayoutParams layoutParams = imageOutter.getLayoutParams();
-        view.setLayoutParams(getDefaultParams(path, layoutParams));
-        view.setBackground(Drawable.createFromPath(path));
+        imageOutter.setLayoutParams(getDefaultParams(path, layoutParams));
+
+        imageOutter.setBackground(Drawable.createFromPath(path));
 
         ScaleImage scaleImage = view.findViewById(R.id.scaleImage);
         scaleImage.onScaledListener = new ScaleImage.OnScaledListener() {
@@ -173,7 +173,6 @@ public class HomeFragment extends BaseFragment {
             public void onScaled(float x, float y, MotionEvent event) {
                 layoutParams.width = (int) (layoutParams.width + x);
                 layoutParams.height = (int) (layoutParams.height + y);
-                Log.d(TAG, String.format("layout 的大小：%d, %d", layoutParams.width, layoutParams.height));
                 imageOutter.setLayoutParams(layoutParams);
             }
 
