@@ -40,10 +40,8 @@ public class ScaleImage extends ImageView {
             case MotionEvent.ACTION_DOWN:
                 touchDownX = event.getX();
                 touchDownY = event.getY();
-//                Log.d(TAG, String.format("onTouchEvent: 初始位置: %f,%f", touchDownX, touchDownY));
                 break;
             case MotionEvent.ACTION_MOVE:
-//                Log.d(TAG, String.format("onTouchEvent: 实时位置: %f,%f", event.getX(), event.getY()));
                 onScaledListener.onScaled(event.getX() - touchDownX, event.getY() - touchDownY, event);
                 break;
         }

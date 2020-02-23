@@ -1,6 +1,10 @@
 package com.to3g.snipasteandroid.fragment;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Picture;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -11,6 +15,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.luck.picture.lib.PictureSelector;
+import com.luck.picture.lib.config.PictureConfig;
+import com.luck.picture.lib.config.PictureMimeType;
+import com.luck.picture.lib.entity.LocalMedia;
+import com.luck.picture.lib.listener.OnResultCallbackListener;
 import com.lzf.easyfloat.EasyFloat;
 import com.lzf.easyfloat.enums.ShowPattern;
 import com.lzf.easyfloat.permission.PermissionUtils;
@@ -23,11 +32,13 @@ import com.to3g.snipasteandroid.Listener.DoubleClickListener;
 import com.to3g.snipasteandroid.R;
 import com.to3g.snipasteandroid.base.BaseFragment;
 import com.to3g.snipasteandroid.lib.ClipBoardUtil;
+import com.to3g.snipasteandroid.lib.GlideEngine;
 import com.to3g.snipasteandroid.lib.Group;
 import com.to3g.snipasteandroid.lib.annotation.Widget;
 import com.to3g.snipasteandroid.view.ScaleImage;
 import com.to3g.snipasteandroid.Listener.DoubleClickListener;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -82,7 +93,7 @@ public class HomeFragment extends BaseFragment {
             onAlbumButtonClick();
         });
         // 初始化图片窗口
-        initImageView();
+//        initImageView();
         return root;
     }
 
@@ -91,10 +102,31 @@ public class HomeFragment extends BaseFragment {
     }
 
     private void onAlbumButtonClick () {
-
+        PictureSelector
+                .create(getActivity())
+                .openGallery(PictureMimeType.ofImage())
+                .loadImageEngine(GlideEngine.createGlideEngine())
+                .enableCrop(true)
+                .freeStyleCropEnabled(true)
+                .selectionMode(PictureConfig.SINGLE)
+                .isSingleDirectReturn(true)
+                .forResult(new OnResultCallbackListener() {
+                    @Override
+                    public void onResult(List<LocalMedia> result) {
+                        if (result.size() > 0) {
+                            LocalMedia localMedia = result.get(0);
+                            String path = localMedia.getCutPath();
+                            Log.d(TAG, "onResult: " + path);
+                            File file = new File(path);
+                            if (file.exists()) {
+                                initImageView(path);
+                            }
+                        }
+                    }
+                });
     }
 
-    private void initImageView() {
+    private void initImageView(String path) {
         EasyFloat
                 .with(Objects.requireNonNull(getActivity()))
                 .setLayout(R.layout.image_paste)
@@ -109,6 +141,7 @@ public class HomeFragment extends BaseFragment {
         layoutParams.width = 300;
         layoutParams.height = 300;
         view.setLayoutParams(layoutParams);
+        view.setBackground(Drawable.createFromPath(path));
 
         ScaleImage scaleImage = view.findViewById(R.id.scaleImage);
         scaleImage.onScaledListener = new ScaleImage.OnScaledListener() {
@@ -116,7 +149,6 @@ public class HomeFragment extends BaseFragment {
             public void onScaled(float x, float y, MotionEvent event) {
                 layoutParams.width = (int) (layoutParams.width + x);
                 layoutParams.height = (int) (layoutParams.height + y);
-                Log.d(TAG, String.format("onScaled: %d, %d", layoutParams.width, layoutParams.height));
                 imageOutter.setLayoutParams(layoutParams);
             }
 
