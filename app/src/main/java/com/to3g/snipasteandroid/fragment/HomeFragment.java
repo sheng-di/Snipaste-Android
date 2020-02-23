@@ -173,6 +173,7 @@ public class HomeFragment extends BaseFragment {
             public void onScaled(float x, float y, MotionEvent event) {
                 layoutParams.width = (int) (layoutParams.width + x);
                 layoutParams.height = (int) (layoutParams.height + y);
+                Log.d(TAG, String.format("layout 的大小：%d, %d", layoutParams.width, layoutParams.height));
                 imageOutter.setLayoutParams(layoutParams);
             }
 
