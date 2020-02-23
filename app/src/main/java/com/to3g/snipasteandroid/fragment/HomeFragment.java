@@ -335,6 +335,11 @@ public class HomeFragment extends BaseFragment {
                 EasyFloat.dismissAppFloat(content);
             }
         }
+        for (String path: floatingImages) {
+            if (EasyFloat.getAppFloatView(path) != null) {
+                EasyFloat.dismissAppFloat(path);
+            }
+        }
     }
 
     @Override
