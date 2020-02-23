@@ -101,10 +101,32 @@ public class HomeFragment extends BaseFragment {
         return root;
     }
 
+    /**
+     * 相机按钮点击事件
+     */
     private void onCameraButtonClick () {
-
+        PictureSelector
+                .create(getActivity())
+                .openCamera(PictureMimeType.ofImage())
+                .loadImageEngine(GlideEngine.createGlideEngine())
+                .enableCrop(true)
+                .freeStyleCropEnabled(true)
+                .forResult(result -> {
+                    if (result.size() > 0) {
+                        LocalMedia localMedia = result.get(0);
+                        String path = localMedia.getCutPath();
+                        Log.d(TAG, "onResult: " + path);
+                        File file = new File(path);
+                        if (file.exists()) {
+                            initImageView(path);
+                        }
+                    }
+                });
     }
 
+    /**
+     * 相册按钮点击事件
+     */
     private void onAlbumButtonClick () {
         PictureSelector
                 .create(getActivity())
@@ -114,17 +136,14 @@ public class HomeFragment extends BaseFragment {
                 .freeStyleCropEnabled(true)
                 .selectionMode(PictureConfig.SINGLE)
                 .isSingleDirectReturn(true)
-                .forResult(new OnResultCallbackListener() {
-                    @Override
-                    public void onResult(List<LocalMedia> result) {
-                        if (result.size() > 0) {
-                            LocalMedia localMedia = result.get(0);
-                            String path = localMedia.getCutPath();
-                            Log.d(TAG, "onResult: " + path);
-                            File file = new File(path);
-                            if (file.exists()) {
-                                initImageView(path);
-                            }
+                .forResult(result -> {
+                    if (result.size() > 0) {
+                        LocalMedia localMedia = result.get(0);
+                        String path = localMedia.getCutPath();
+                        Log.d(TAG, "onResult: " + path);
+                        File file = new File(path);
+                        if (file.exists()) {
+                            initImageView(path);
                         }
                     }
                 });
