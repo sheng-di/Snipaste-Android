@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Snipaste</string>
+    <string name="app_name">屏幕贴图</string>
     <string name="clipboard_button_text">剪贴板</string>
     <string name="default_text">默认文字</string>
 
