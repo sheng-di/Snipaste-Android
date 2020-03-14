@@ -80,6 +80,13 @@
                     android:text="@string/cameraText"
                     style="@style/NormalButton"
                     />
+                <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/screenButton"
+                    android:text="@string/screen_area"
+                    style="@style/NormalButton"
+                    />
             </LinearLayout>
             <TextView
                 android:text="@string/help"

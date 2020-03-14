@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.piasy.rxscreenshotdetector.RxScreenshotDetector;
 import com.google.android.material.slider.Slider;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
@@ -51,6 +52,7 @@ import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import kotlin.Unit;
 
 @LatestVisitRecord
@@ -91,19 +93,8 @@ public class HomeFragment extends BaseFragment {
         ButterKnife.bind(this, root);
         // 初始化TopBar
         initTopBar();
-        // 绑定按钮点击事件
-        pasteClipboardButton.setOnClickListener(v -> {
-            onPasteClickboardButtonClick();
-        });
-        pasteTextButton.setOnClickListener(v -> {
-            onPasteTextButtonClick();
-        });
-        cameraButton.setOnClickListener(v -> {
-            onCameraButtonClick();
-        });
-        albumButton.setOnClickListener(v -> {
-            onAlbumButtonClick();
-        });
+
+        // 滑块
         slider.setPosition(1);
         slider.setPositionListener(pos -> {
             Log.d(TAG, "onCreateView: " + pos);
@@ -113,6 +104,9 @@ public class HomeFragment extends BaseFragment {
         });
         setFloatViewOpacity();
         return root;
+    }
+
+    private void initScreenshotListener () {
     }
 
     private void setFloatViewOpacity () {
@@ -133,7 +127,8 @@ public class HomeFragment extends BaseFragment {
     /**
      * 相机按钮点击事件
      */
-    private void onCameraButtonClick () {
+    @OnClick(R.id.cameraButton)
+    protected void onCameraButtonClick () {
         PictureSelector
                 .create(getActivity())
                 .openCamera(PictureMimeType.ofImage())
@@ -156,7 +151,8 @@ public class HomeFragment extends BaseFragment {
     /**
      * 相册按钮点击事件
      */
-    private void onAlbumButtonClick () {
+    @OnClick(R.id.albumButton)
+    protected void onAlbumButtonClick () {
         PictureSelector
                 .create(getActivity())
                 .openGallery(PictureMimeType.ofImage())
@@ -176,6 +172,13 @@ public class HomeFragment extends BaseFragment {
                         }
                     }
                 });
+    }
+
+    /**
+     * 屏幕区域按钮点击事件
+     */
+    @OnClick(R.id.screenButton)
+    protected void onScreenButtonClick () {
     }
 
     private ViewGroup.LayoutParams getDefaultParams (String path, ViewGroup.LayoutParams layoutParams) {
@@ -241,11 +244,13 @@ public class HomeFragment extends BaseFragment {
         setFloatViewOpacity();
     }
 
-    private void onPasteTextButtonClick () {
+    @OnClick(R.id.pasteTextButton)
+    protected void onPasteTextButtonClick () {
         floatText(editText.getText().toString());
     }
 
-    private void onPasteClickboardButtonClick () {
+    @OnClick(R.id.pasteClipboardButton)
+    protected void onPasteClickboardButtonClick () {
         String content = ClipBoardUtil.get(Objects.requireNonNull(getContext()));
         Log.d(TAG, "剪切板内容: " + content);
         editText.setText(content);

@@ -34,4 +34,5 @@
     <string name="help">帮助</string>
     <string name="opacity">不透明度</string>
     <string name="helpText">双击浮窗可以关闭</string>
+    <string name="screen_area">屏幕区域</string>
 </resources>
