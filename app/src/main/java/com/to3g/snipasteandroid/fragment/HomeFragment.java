@@ -1,9 +1,9 @@
 package com.to3g.snipasteandroid.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Picture;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -13,22 +13,20 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.github.piasy.rxscreenshotdetector.RxScreenshotDetector;
-import com.google.android.material.slider.Slider;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
-import com.luck.picture.lib.listener.OnResultCallbackListener;
 import com.lzf.easyfloat.EasyFloat;
 import com.lzf.easyfloat.enums.ShowPattern;
 import com.lzf.easyfloat.permission.PermissionUtils;
 import com.qmuiteam.qmui.arch.annotation.LatestVisitRecord;
-import com.qmuiteam.qmui.widget.QMUISlider;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
@@ -42,8 +40,8 @@ import com.to3g.snipasteandroid.lib.GlideEngine;
 import com.to3g.snipasteandroid.lib.Group;
 import com.to3g.snipasteandroid.lib.ImageUtil;
 import com.to3g.snipasteandroid.lib.annotation.Widget;
+import com.to3g.snipasteandroid.service.NotificationService;
 import com.to3g.snipasteandroid.view.ScaleImage;
-import com.to3g.snipasteandroid.Listener.DoubleClickListener;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -53,6 +51,10 @@ import java.util.Objects;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import eu.bolt.screenshotty.ScreenshotBitmap;
+import eu.bolt.screenshotty.ScreenshotManager;
+import eu.bolt.screenshotty.ScreenshotManagerBuilder;
+import eu.bolt.screenshotty.ScreenshotResult;
 import kotlin.Unit;
 
 @LatestVisitRecord
@@ -86,6 +88,10 @@ public class HomeFragment extends BaseFragment {
     private List<String> floatingImages = new ArrayList<>();
     private float opacity = 1.0f;
 
+    private ScreenshotManager screenshotManager;
+    private int REQUEST_SCREENSHOT_PERMISSION = 888;
+
+
     @Override
     protected View onCreateView() {
         // 绑定视图
@@ -97,16 +103,12 @@ public class HomeFragment extends BaseFragment {
         // 滑块
         slider.setPosition(1);
         slider.setPositionListener(pos -> {
-            Log.d(TAG, "onCreateView: " + pos);
             opacity = pos;
             setFloatViewOpacity();
             return Unit.INSTANCE;
         });
         setFloatViewOpacity();
         return root;
-    }
-
-    private void initScreenshotListener () {
     }
 
     private void setFloatViewOpacity () {
@@ -179,6 +181,39 @@ public class HomeFragment extends BaseFragment {
      */
     @OnClick(R.id.screenButton)
     protected void onScreenButtonClick () {
+//        pasteScreenshot();
+        Intent intent = new Intent(getContext(), NotificationService.class);
+        getContext().startService(intent);
+    }
+
+    private void pasteScreenshot () {
+        screenshotManager = new ScreenshotManagerBuilder(getActivity())
+                .withPermissionRequestCode(REQUEST_SCREENSHOT_PERMISSION)
+                .build();
+        ScreenshotResult screenshotResult = screenshotManager.makeScreenshot();
+        screenshotResult.observe((screenshot) -> {
+            initImageView(((ScreenshotBitmap) screenshot).getBitmap());
+            return Unit.INSTANCE;
+        }, (throwable -> {
+            return Unit.INSTANCE;
+        }));
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d(TAG, "onActivityResult: ");
+        screenshotManager.onActivityResult(requestCode, requestCode, data);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     private ViewGroup.LayoutParams getDefaultParams (String path, ViewGroup.LayoutParams layoutParams) {
@@ -191,6 +226,25 @@ public class HomeFragment extends BaseFragment {
         Size size = ImageUtil.getImageSize(path);
         int imgWidth = size.getWidth();
         int imgHeight = size.getHeight();
+        Log.d(TAG, String.format("initImageView: 图片大小：%d, %d", imgWidth, imgHeight));
+
+        float rate = 0.8f;
+
+        layoutParams.width = (int) (rate * screenWidth);
+        layoutParams.height = (int) (layoutParams.width * 1.0f / imgWidth * imgHeight);
+        Log.d(TAG, String.format("initImageView: layout 大小：%d, %d", layoutParams.width, layoutParams.height));
+        return layoutParams;
+    }
+
+    private ViewGroup.LayoutParams getDefaultParams (Bitmap bitmap, ViewGroup.LayoutParams layoutParams) {
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int screenWidth = displayMetrics.widthPixels;
+
+        // 获取图片宽高
+        int imgWidth = bitmap.getWidth();
+        int imgHeight = bitmap.getHeight();
         Log.d(TAG, String.format("initImageView: 图片大小：%d, %d", imgWidth, imgHeight));
 
         float rate = 0.8f;
@@ -239,6 +293,50 @@ public class HomeFragment extends BaseFragment {
             public void onDoubleClick(View v) {
                 EasyFloat.dismissAppFloat(path);
                 floatingImages.remove(path);
+            }
+        });
+        setFloatViewOpacity();
+    }
+
+    private void initImageView(Bitmap bitmap) {
+        String tagName = "bitmap";
+        EasyFloat
+                .with(Objects.requireNonNull(getActivity()))
+                .setLayout(R.layout.image_paste)
+                .setShowPattern(ShowPattern.ALL_TIME)
+                .setLocation(100, 200)
+                .setTag(tagName)
+                .show();
+        floatingImages.add(tagName);
+        View view = EasyFloat.getAppFloatView(tagName);
+        assert view != null;
+        View imageOutter = view.findViewById(R.id.imageOutter);
+        View imageOutterShadow = view.findViewById(R.id.imageOutterShadow);
+
+        ViewGroup.LayoutParams layoutParams = imageOutterShadow.getLayoutParams();
+        imageOutterShadow.setLayoutParams(getDefaultParams(bitmap, layoutParams));
+
+        imageOutter.setBackground(new BitmapDrawable(bitmap));
+
+        ScaleImage scaleImage = view.findViewById(R.id.scaleImage);
+        scaleImage.onScaledListener = new ScaleImage.OnScaledListener() {
+            @Override
+            public void onScaled(float x, float y, MotionEvent event) {
+                layoutParams.width = (int) (layoutParams.width + x);
+                layoutParams.height = (int) (layoutParams.height + y);
+                imageOutterShadow.setLayoutParams(layoutParams);
+            }
+
+            @Override
+            public void onScaleChange(float scaleFactor, float focusX, float focusY) {
+
+            }
+        };
+        view.setOnClickListener(new DoubleClickListener() {
+            @Override
+            public void onDoubleClick(View v) {
+                EasyFloat.dismissAppFloat(tagName);
+                floatingImages.remove(tagName);
             }
         });
         setFloatViewOpacity();

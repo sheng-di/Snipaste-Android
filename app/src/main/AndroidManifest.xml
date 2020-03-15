@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.to3g.snipasteandroid" >
+    package="com.to3g.snipasteandroid">
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
     <application
         android:name=".QDApplication"
         android:icon="@mipmap/ic_launcher"
@@ -15,7 +17,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".QDMainActivity" >
+        <service
+            android:name=".service.NotificationService"
+            android:enabled="true"
+            android:exported="true"></service>
+
+        <activity android:name=".QDMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
