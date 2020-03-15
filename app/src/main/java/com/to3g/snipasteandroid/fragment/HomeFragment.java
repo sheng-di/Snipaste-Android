@@ -2,6 +2,7 @@ package com.to3g.snipasteandroid.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -40,6 +41,8 @@ import com.to3g.snipasteandroid.lib.GlideEngine;
 import com.to3g.snipasteandroid.lib.Group;
 import com.to3g.snipasteandroid.lib.ImageUtil;
 import com.to3g.snipasteandroid.lib.annotation.Widget;
+import com.to3g.snipasteandroid.receiver.MyReceiver;
+import com.to3g.snipasteandroid.receiver.MyReceiverHandler;
 import com.to3g.snipasteandroid.service.NotificationService;
 import com.to3g.snipasteandroid.view.ScaleImage;
 
@@ -90,6 +93,7 @@ public class HomeFragment extends BaseFragment {
 
     private ScreenshotManager screenshotManager;
     private int REQUEST_SCREENSHOT_PERMISSION = 888;
+    private MyReceiver myReceiver;
 
 
     @Override
@@ -108,7 +112,21 @@ public class HomeFragment extends BaseFragment {
             return Unit.INSTANCE;
         });
         setFloatViewOpacity();
+        initReceiver();
         return root;
+    }
+
+    private void initReceiver () {
+        myReceiver = new MyReceiver();
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(MyReceiver.ACTION_SCREENSHOT);
+        getContext().registerReceiver(myReceiver, intentFilter);
+        myReceiver.setMyReceiverHandler(new MyReceiverHandler() {
+            @Override
+            public void doScreenshot() {
+                Toast.makeText(getContext(), "doScreenshot", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void setFloatViewOpacity () {

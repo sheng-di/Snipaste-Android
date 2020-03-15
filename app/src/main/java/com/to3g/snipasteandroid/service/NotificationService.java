@@ -32,9 +32,10 @@ public class NotificationService extends Service {
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Intent notificationIntent = new Intent(this, QDMainActivity.class);
+        Intent notificationIntent = new Intent(this, ScreenshotService.class);
         PendingIntent pendingIntent =
-                PendingIntent.getActivity(this, 0, notificationIntent, 0);
+                PendingIntent.getService(this, 0, notificationIntent, 0);
+
         NotificationManager notificationManager= (NotificationManager) getSystemService(getApplicationContext().NOTIFICATION_SERVICE);
         NotificationChannel channel = null;
         String CHANNEL_DEFAULT_IMPORTANCE = "foreground";
