@@ -1,27 +1,47 @@
 # Snipaste-Android
+[中文版本](./README.cn.md)
 
-电脑上常用的截图、贴图工具，苦于没有安卓版本，遂自学了一些基础的安卓开发编写了一个。
+The screenshot and texture tools commonly used on the computer, but have no Android version, so I learned some basic Android development and wrote one. (Non `snipaste` official)
 
-目前有贴文字、贴图片的功能。
+## Features
+At present, there are functions for pasting text and pictures.
 
-1、贴文字
+1.Post text
 
-- 输入文字生成悬浮窗
+-Enter text to generate floating window
 
-- 剪贴板文字生成悬浮窗
+-Clipboard text generates floating window
 
-​2、贴图片
+2, Post pictures
 
-- 相册图片生成悬浮窗
+-Floating window for album picture generation
 
-- 拍照图片生成悬浮窗
+-Generate floating window for taking pictures
 
-- 生成悬浮窗前裁剪图片
+-Crop image in front of floating window
 
-3、透明度调整功能
+3.Transparency adjustment function
 
-4、双击关闭悬浮窗
+4.Double-click to close the floating window
 
-5、支持多个悬浮窗
+5.Support multiple floating windows
 
-技术不佳，后期看反馈可开源代码。
+## screenshot
+<img src = "screenshot/1.jpg" width = "300" />
+<img src = "screenshot/2.jpg" width = "300" />
+<img src = "screenshot/3.jpg" width = "300" />
+<img src = "screenshot/4.jpg" width = "300" />
+
+## Download
+Has been renamed Kuan: [click here] (https://www.coolapk.com/apk/255872)
+
+
+## todo
+- [ ] Area screenshot
+- [ ] Post a video
+- [ ] Other video software is cast to the floating window, so that software without small window function can use the small window playback function.
+
+## Dependence
+-[QMUI] (https://github.com/Tencent/QMUI_Android), the interface uses this
+-[Easy_Float] (https://github.com/princekin-f/EasyFloat), the core of the floating window
+-[fluid-slider] (https://github.com/Ramotion/fluid-slider-android) Liquid slider at the bottom
