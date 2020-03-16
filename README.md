@@ -6,25 +6,26 @@ The screenshot and texture tools commonly used on the computer, but have no Andr
 ## Features
 At present, there are functions for pasting text and pictures.
 
-1.Post text
+### Post text
 
--Enter text to generate floating window
+- Enter text to generate floating window
 
--Clipboard text generates floating window
+- Clipboard text generates floating window
 
-2, Post pictures
+### Post pictures
 
--Floating window for album picture generation
+- Floating window for album picture generation
 
--Generate floating window for taking pictures
+- Generate floating window for taking pictures
 
--Crop image in front of floating window
+- Crop image in front of floating window
 
-3.Transparency adjustment function
+### Others
+- Transparency adjustment function
 
-4.Double-click to close the floating window
+- Double-click to close the floating window
 
-5.Support multiple floating windows
+- Support multiple floating windows
 
 ## screenshot
 <img src = "screenshot/1.jpg" width = "300" />
@@ -42,6 +43,6 @@ Has been renamed Kuan: [click here] (https://www.coolapk.com/apk/255872)
 - [ ] Other video software is cast to the floating window, so that software without small window function can use the small window playback function.
 
 ## Dependence
--[QMUI] (https://github.com/Tencent/QMUI_Android), the interface uses this
--[Easy_Float] (https://github.com/princekin-f/EasyFloat), the core of the floating window
--[fluid-slider] (https://github.com/Ramotion/fluid-slider-android) Liquid slider at the bottom
+- [QMUI](https://github.com/Tencent/QMUI_Android), the interface uses this
+- [Easy_Float](https://github.com/princekin-f/EasyFloat), the core of the floating window
+- [fluid-slider](https://github.com/Ramotion/fluid-slider-android) Liquid slider at the bottom
