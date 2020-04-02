@@ -26,9 +26,6 @@ import androidx.annotation.NonNull;
 import com.qmuiteam.qmui.arch.QMUISwipeBackActivityManager;
 import com.qmuiteam.qmui.qqface.QMUIQQFaceCompiler;
 
-/**
- * Snipaste 的 Application 入口。
- */
 public class QDApplication extends Application {
 
     public static boolean openSkinMake = false;

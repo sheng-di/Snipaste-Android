@@ -102,8 +102,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <com.ramotion.fluidslider.FluidSlider
-                    app:start_text="透明"
-                    app:end_text="不透明"
+                    app:start_text="@string/transparent"
+                    app:end_text="@string/opaque"
                     android:id="@+id/slider"
                     app:bar_color="#eeeeee"
                     app:bubble_text_color="@color/picture_color_white"

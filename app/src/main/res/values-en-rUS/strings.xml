@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ScreenPaste</string>
+    <string name="about_title">about</string>
+    <string name="album">album</string>
+    <string name="blankContent">blank content</string>
+    <string name="button_clear_text">clear</string>
+    <string name="cameraText">camera</string>
+    <string name="cancelText">cancel</string>
+    <string name="clear_all_text">close all text floating windows</string>
+    <string name="clipboard_button_text">clipboard</string>
+    <string name="default_text">default text</string>
+    <string name="floatingPermissionText">To use the floating window function, you need to grant the floating window permission.</string>
+    <string name="help">help</string>
+    <string name="helpText">Double-click the floating window to close</string>
+    <string name="needFloatingPermission">floating window permission needed</string>
+    <string name="notification_content">Click for partial screenshot</string>
+    <string name="opacity">opacity</string>
+    <string name="pasteSectionTitle1">float text</string>
+    <string name="pasteSegment_tab_picture">piture</string>
+    <string name="pasteSegment_tab_text">text</string>
+    <string name="pasteTextButtonText">float clipboard text</string>
+    <string name="pasteTextEditHint">input some text ...</string>
+    <string name="paste_on_screen">float on the screen</string>
+    <string name="paste_title_2">float picture</string>
+    <string name="screen_area">partial screen</string>
+    <string name="setting">settings</string>
+    <string name="tabSegment_item_1_content">first item</string>
+    <string name="tabSegment_item_2_content">second item</string>
+    <string name="test_activity">test activity</string>
+    <string name="textFloated">content already floated</string>
+    <string name="toOpen">go to grant</string>
+    <string name="about_item_homepage">go to home page</string>
+    <string name="transparent">transparent</string>
+    <string name="opaque">opaque</string>
+</resources>

@@ -98,13 +98,13 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     protected View onCreateView() {
-        // 绑定视图
+        // bind view
         View root = LayoutInflater.from(getContext()).inflate(R.layout.home_layout, null);
         ButterKnife.bind(this, root);
-        // 初始化TopBar
+        // init the top bar
         initTopBar();
 
-        // 滑块
+        // init the bottom slider
         slider.setPosition(1);
         slider.setPositionListener(pos -> {
             opacity = pos;
@@ -145,7 +145,7 @@ public class HomeFragment extends BaseFragment {
     }
 
     /**
-     * 相机按钮点击事件
+     * When click the camera button
      */
     @OnClick(R.id.cameraButton)
     protected void onCameraButtonClick () {
@@ -169,7 +169,7 @@ public class HomeFragment extends BaseFragment {
     }
 
     /**
-     * 相册按钮点击事件
+     * When click the album button
      */
     @OnClick(R.id.albumButton)
     protected void onAlbumButtonClick () {
@@ -195,7 +195,7 @@ public class HomeFragment extends BaseFragment {
     }
 
     /**
-     * 屏幕区域按钮点击事件
+     * When click the screenButton
      */
     @OnClick(R.id.screenButton)
     protected void onScreenButtonClick () {
@@ -244,13 +244,13 @@ public class HomeFragment extends BaseFragment {
         Size size = ImageUtil.getImageSize(path);
         int imgWidth = size.getWidth();
         int imgHeight = size.getHeight();
-        Log.d(TAG, String.format("initImageView: 图片大小：%d, %d", imgWidth, imgHeight));
+        Log.d(TAG, String.format("initImageView: image size：%d, %d", imgWidth, imgHeight));
 
         float rate = 0.8f;
 
         layoutParams.width = (int) (rate * screenWidth);
         layoutParams.height = (int) (layoutParams.width * 1.0f / imgWidth * imgHeight);
-        Log.d(TAG, String.format("initImageView: layout 大小：%d, %d", layoutParams.width, layoutParams.height));
+        Log.d(TAG, String.format("initImageView: layout size：%d, %d", layoutParams.width, layoutParams.height));
         return layoutParams;
     }
 
@@ -263,13 +263,13 @@ public class HomeFragment extends BaseFragment {
         // 获取图片宽高
         int imgWidth = bitmap.getWidth();
         int imgHeight = bitmap.getHeight();
-        Log.d(TAG, String.format("initImageView: 图片大小：%d, %d", imgWidth, imgHeight));
+        Log.d(TAG, String.format("initImageView: image size：%d, %d", imgWidth, imgHeight));
 
         float rate = 0.8f;
 
         layoutParams.width = (int) (rate * screenWidth);
         layoutParams.height = (int) (layoutParams.width * 1.0f / imgWidth * imgHeight);
-        Log.d(TAG, String.format("initImageView: layout 大小：%d, %d", layoutParams.width, layoutParams.height));
+        Log.d(TAG, String.format("initImageView: layout size：%d, %d", layoutParams.width, layoutParams.height));
         return layoutParams;
     }
 
@@ -368,24 +368,24 @@ public class HomeFragment extends BaseFragment {
     @OnClick(R.id.pasteClipboardButton)
     protected void onPasteClickboardButtonClick () {
         String content = ClipBoardUtil.get(Objects.requireNonNull(getContext()));
-        Log.d(TAG, "剪切板内容: " + content);
+        Log.d(TAG, "clipboard content: " + content);
         editText.setText(content);
         floatText(content);
     }
 
     private void showFloatText (String content) {
-        // 查看是否已经创建过这个弹窗
+        // check if the floating window has been created
         View view = EasyFloat.getAppFloatView(content);
         if (content == null || content.equals("")) {
-            Toast.makeText(getContext(), "内容为空", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), getText(R.string.blankContent), Toast.LENGTH_SHORT).show();
             return;
         }
-        // 如果已经创建，返回 false
+        // if alerady created, return false
         if (view != null) {
-            Toast.makeText(getContext(), "已悬浮", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), getText(R.string.textFloated), Toast.LENGTH_SHORT).show();
             return;
         }
-        // 创建一个新的
+        // create new one
         EasyFloat
                 .with(Objects.requireNonNull(getActivity()))
                 .setLayout(R.layout.text_paste)
@@ -409,20 +409,20 @@ public class HomeFragment extends BaseFragment {
     }
 
     private void floatText(String content) {
-        // 检查权限
+        // check the permission
         if (PermissionUtils.checkPermission(Objects.requireNonNull(getContext()))) {
             showFloatText(content);
         } else {
-            // 提示用户要申请权限了
+            // prompt to request permission
             new QMUIDialog.MessageDialogBuilder(getActivity())
-                    .setMessage("使用浮窗功能，需要您授予悬浮窗权限。")
-                    .addAction("取消", new QMUIDialogAction.ActionListener() {
+                    .setMessage(getText(R.string.floatingPermissionText))
+                    .addAction(getText(R.string.cancelText), new QMUIDialogAction.ActionListener() {
                         @Override
                         public void onClick(QMUIDialog dialog, int index) {
                             dialog.dismiss();
                         }
                     })
-                    .addAction(0, "去开启", QMUIDialogAction.ACTION_PROP_POSITIVE, new QMUIDialogAction.ActionListener() {
+                    .addAction(0, getText(R.string.toOpen), QMUIDialogAction.ACTION_PROP_POSITIVE, new QMUIDialogAction.ActionListener() {
                         @Override
                         public void onClick(QMUIDialog dialog, int index) {
                             dialog.dismiss();
@@ -430,7 +430,7 @@ public class HomeFragment extends BaseFragment {
                                 if(result) {
                                     showFloatText(content);
                                 } else {
-                                    Toast.makeText(getContext(), "需要悬浮窗权限才能悬浮", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(), getText(R.string.needFloatingPermission), Toast.LENGTH_SHORT).show();
                                 }
                             });
                         }
@@ -448,7 +448,7 @@ public class HomeFragment extends BaseFragment {
     }
 
     /**
-     * 清空所有文本悬浮
+     * Clear all text floating windows
      */
     private void clearAllTextFloatViews () {
         for (String content : floatings) {

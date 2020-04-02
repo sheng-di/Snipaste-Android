@@ -19,7 +19,6 @@ public class ScreenshotService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-//        Toast.makeText(this, "截屏服务", Toast.LENGTH_SHORT).show();
         Intent it = new Intent();
         it.setAction(MyReceiver.ACTION_SCREENSHOT);
         sendBroadcast(it);

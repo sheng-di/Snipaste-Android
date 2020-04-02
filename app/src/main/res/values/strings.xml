@@ -3,18 +3,18 @@
     <string name="clipboard_button_text">剪贴板</string>
     <string name="default_text">默认文字</string>
 
-    <string name="ok">OK</string>
-    <string name="cancel">CANCEL</string>
+    <string name="ok" translatable="false">OK</string>
+    <string name="cancel" translatable="false">CANCEL</string>
 
     <!-- 关于界面 -->
     <string name="about_title">关于</string>
     <string name="about_item_homepage">访问官网</string>
-    <string name="about_item_github">GitHub</string>
-    <string name="about_copyright">© %1$s QMUI Team All rights reserved.</string>
+    <string name="about_item_github" translatable="false">GitHub</string>
+    <string name="about_copyright" translatable="false">© %1$s QMUI Team All rights reserved.</string>
 
     <!-- TabSegmentFragment 选项卡展示界面 -->
-    <string name="tabSegment_item_1_title">Item 1</string>
-    <string name="tabSegment_item_2_title">Item 2</string>
+    <string name="tabSegment_item_1_title" translatable="false">Item 1</string>
+    <string name="tabSegment_item_2_title" translatable="false">Item 2</string>
     <string name="tabSegment_item_1_content">这是第一个 Item 的内容区</string>
     <string name="tabSegment_item_2_content">这是第二个 Item 的内容区</string>
 
@@ -37,4 +37,12 @@
     <string name="screen_area">屏幕区域</string>
     <string name="test_activity">测试activity</string>
     <string name="notification_content">点按区域截图</string>
+    <string name="blankContent">内容为空</string>
+    <string name="textFloated">已悬浮</string>
+    <string name="floatingPermissionText">使用浮窗功能，需要您授予悬浮窗权限。</string>
+    <string name="cancelText">取消</string>
+    <string name="toOpen">去开启</string>
+    <string name="needFloatingPermission">需要悬浮窗权限才能悬浮</string>
+    <string name="transparent">透明</string>
+    <string name="opaque">不透明</string>
 </resources>
