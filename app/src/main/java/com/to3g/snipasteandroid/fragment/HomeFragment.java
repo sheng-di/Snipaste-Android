@@ -144,11 +144,7 @@ public class HomeFragment extends BaseFragment {
         }
     }
 
-    /**
-     * When click the camera button
-     */
-    @OnClick(R.id.cameraButton)
-    protected void onCameraButtonClick () {
+    private void pasteCamera () {
         PictureSelector
                 .create(getActivity())
                 .openCamera(PictureMimeType.ofImage())
@@ -169,10 +165,41 @@ public class HomeFragment extends BaseFragment {
     }
 
     /**
-     * When click the album button
+     * When click the camera button
      */
-    @OnClick(R.id.albumButton)
-    protected void onAlbumButtonClick () {
+    @OnClick(R.id.cameraButton)
+    protected void onCameraButtonClick () {
+        // check the permission
+        if (PermissionUtils.checkPermission(Objects.requireNonNull(getContext()))) {
+            pasteCamera();
+        } else {
+            // prompt to request permission
+            new QMUIDialog.MessageDialogBuilder(getActivity())
+                    .setMessage(getText(R.string.floatingPermissionText))
+                    .addAction(getText(R.string.cancelText), new QMUIDialogAction.ActionListener() {
+                        @Override
+                        public void onClick(QMUIDialog dialog, int index) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .addAction(0, getText(R.string.toOpen), QMUIDialogAction.ACTION_PROP_POSITIVE, new QMUIDialogAction.ActionListener() {
+                        @Override
+                        public void onClick(QMUIDialog dialog, int index) {
+                            dialog.dismiss();
+                            PermissionUtils.requestPermission(getActivity(), result -> {
+                                if(result) {
+                                    pasteCamera();
+                                } else {
+                                    Toast.makeText(getContext(), getText(R.string.needFloatingPermission), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    })
+                    .create(R.style.QMUI_Dialog).show();
+        }
+    }
+
+    private void pasteAlbum () {
         PictureSelector
                 .create(getActivity())
                 .openGallery(PictureMimeType.ofImage())
@@ -192,6 +219,41 @@ public class HomeFragment extends BaseFragment {
                         }
                     }
                 });
+    }
+
+    /**
+     * When click the album button
+     */
+    @OnClick(R.id.albumButton)
+    protected void onAlbumButtonClick () {
+        // check the permission
+        if (PermissionUtils.checkPermission(Objects.requireNonNull(getContext()))) {
+            pasteAlbum();
+        } else {
+            // prompt to request permission
+            new QMUIDialog.MessageDialogBuilder(getActivity())
+                    .setMessage(getText(R.string.floatingPermissionText))
+                    .addAction(getText(R.string.cancelText), new QMUIDialogAction.ActionListener() {
+                        @Override
+                        public void onClick(QMUIDialog dialog, int index) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .addAction(0, getText(R.string.toOpen), QMUIDialogAction.ACTION_PROP_POSITIVE, new QMUIDialogAction.ActionListener() {
+                        @Override
+                        public void onClick(QMUIDialog dialog, int index) {
+                            dialog.dismiss();
+                            PermissionUtils.requestPermission(getActivity(), result -> {
+                                if(result) {
+                                    pasteAlbum();
+                                } else {
+                                    Toast.makeText(getContext(), getText(R.string.needFloatingPermission), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    })
+                    .create(R.style.QMUI_Dialog).show();
+        }
     }
 
     /**
